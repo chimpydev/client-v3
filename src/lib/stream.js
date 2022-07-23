@@ -11,7 +11,7 @@ import { setTitle, shortSymbol, showToast, hideToast } from './utils'
 let ws;
 let h;
 let subscribedProducts = {
-	'ETH-USD': true
+	'FTM-USD': true
 };
 
 function heartbeat() {
@@ -106,13 +106,13 @@ export function initWebsocket() {
 	// Poll
 	clearInterval(poller);
 
-	for (const product_id of ['ETH-USD', 'BTC-USD']) {
+	for (const product_id of ['FTM-USD', 'BTC-USD']) {
 		getPrice(product_id);
 	}
 
 	// Poll for prices every 5 sec
 	poller = setInterval(() => {
-		for (const product_id of ['ETH-USD', 'BTC-USD']) {
+		for (const product_id of ['FTM-USD', 'BTC-USD']) {
 			getPrice(product_id);
 		}
 	}, 5000);

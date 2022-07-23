@@ -189,7 +189,7 @@
 				</div>
 
 				<div class='button-wrap'>
-					<a class='button' href='https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x031d35296154279dc1984dcd93e392b1f946737b' target="_blank">Buy CAP on Uniswap</a>
+					<a class='button' href='https://app.uniswap.org/#/swap?inputCurrency=FTM&outputCurrency=0x031d35296154279dc1984dcd93e392b1f946737b' target="_blank">Buy CAP on Uniswap</a>
 					<div class='chains'>Set your network to {@html ARBITRUM_ICON} Arbitrum</div>
 				</div>
 

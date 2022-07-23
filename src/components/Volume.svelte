@@ -7,17 +7,17 @@
 	import { prices } from '../lib/stores'
 
 	let v;
-	let volumeETH;
+	let volumeFTM;
 	let volumeUSD;
 
 	onMount(async () => {
 		const res = await getVolume();
 		// console.log('res', res);
-		volumeETH = res.volumeETH;
+		volumeFTM = res.volumeFTM;
 		volumeUSD = res.volumeUSD;
 		v = setInterval(async () => {
 			const res = await getVolume();
-			volumeETH = res.volumeETH;
+			volumeFTM = res.volumeFTM;
 			volumeUSD = res.volumeUSD;
 		}, 60*1000);
 	});
@@ -29,15 +29,15 @@
 	let volume_eth;
 	let volume_usd;
 
-	function calculateVolume(_prices, _volumeETH, _volumeUSD) {
-		// console.log('calculateVolume', _prices, _volumeETH, _volumeUSD);
-		if (!_prices['ETH-USD']) return;
-		volume_eth = _volumeUSD * 1 / _prices['ETH-USD'] + _volumeETH * 1;
-		volume_usd = _volumeUSD * 1 + _prices['ETH-USD'] * _volumeETH * 1;
+	function calculateVolume(_prices, _volumeFTM, _volumeUSD) {
+		// console.log('calculateVolume', _prices, _volumeFTM, _volumeUSD);
+		if (!_prices['FTM-USD']) return;
+		volume_eth = _volumeUSD * 1 / _prices['FTM-USD'] + _volumeFTM * 1;
+		volume_usd = _volumeUSD * 1 + _prices['FTM-USD'] * _volumeFTM * 1;
 		volume_usd = Math.round(volume_usd);
 	}
 
-	$: calculateVolume($prices, volumeETH, volumeUSD);
+	$: calculateVolume($prices, volumeFTM, volumeUSD);
 
 </script>
 

@@ -37,7 +37,7 @@ export async function selectProduct(productId) {
 	// console.log('product', product);
 
 	if (!product.symbol) {
-		product = formatProduct('ETH-USD', {symbol: 'ETH-USD', productId: 'ETH-USD', maxLeverage: 50 * 10**8, fee: 0});
+		product = formatProduct('FTM-USD', {symbol: 'FTM-USD', productId: 'FTM-USD', maxLeverage: 50 * 10**8, fee: 0});
 	}
 
 	// console.log('product2', product);
@@ -87,7 +87,7 @@ export async function getAllowance(currencyLabel, spenderName) {
 
 	// console.log('currencyLabel', currencyLabel);
 
-	if (currencyLabel == 'weth') {
+	if (currencyLabel == 'wftm') {
 		Stores.allowances.update((x) => {
 			if (!x[currencyLabel]) x[currencyLabel] = {};
 			x[currencyLabel][spenderName] = parseUnits(10**10, 18);
@@ -167,8 +167,8 @@ export async function getBalanceOf(currencyLabel, address) {
 	}
 
 	let balance, decimals;
-	if (currencyLabel == 'weth') {
-		// get ETH balance
+	if (currencyLabel == 'wftm') {
+		// get FTM balance
 		balance = await get(Stores.provider).getBalance(address);
 	} else {
 		const contract = await getContract(currencyLabel);
@@ -364,7 +364,7 @@ export async function deposit(currencyLabel, amount) {
 	try {
 		let tx;
 
-		if (currencyLabel == 'weth') {
+		if (currencyLabel == 'wftm') {
 			tx = await contract.deposit(0, {value: parseUnits(amount, 18)});
 		} else {
 			tx = await contract.deposit(parseUnits(amount, 18));
@@ -565,7 +565,7 @@ export async function submitOrder(isLong) {
 
 		let marginEth = 0;
 
-		if (currencyLabel == 'weth') {
+		if (currencyLabel == 'wftm') {
 			// Add fee to margin
 			const product = get(Stores.product);
 			const fee = product.fee * 1;
@@ -615,7 +615,7 @@ export async function submitCloseOrder(productId, currencyLabel, isLong, size) {
 	try {
 		let tx;
 
-		if (currencyLabel == 'weth') {
+		if (currencyLabel == 'wftm') {
 
 			const product = await getProduct(productId);
 			const fee = (size * product.fee / 100).toFixed(10);

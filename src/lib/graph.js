@@ -38,18 +38,18 @@ export async function getVolume() {
   	
   	// console.log('datas', datas);
   	
-	let volumeETH = 420000; // cumulative previous versions of CAP
+	let volumeFTM = 420000; // cumulative previous versions of CAP
 	let volumeUSD = 0; // v2 + v1
 	for (const d of datas) {
 		// console.log('d', d);
-		if (d.id == ADDRESS_ZERO) { // ETH
-			volumeETH += formatUnits(d.cumulativeVolume) * 1;
+		if (d.id == ADDRESS_ZERO) { // FTM
+			volumeFTM += formatUnits(d.cumulativeVolume) * 1;
 		} else {
 			volumeUSD += formatUnits(d.cumulativeVolume) * 1;
 		}
 	}
 	return {
-		volumeETH: volumeETH,
+		volumeFTM: volumeFTM,
 		volumeUSD: volumeUSD
 	};
 }

@@ -92,8 +92,8 @@
 
 	async function getSizeInUSD(_currencyLabel, _prices, _size) {
 		if (!_prices || !_currencyLabel || !_size) return 0;
-		if (_currencyLabel == 'weth') {
-			sizeInUSD = _prices['ETH-USD'] * _size;
+		if (_currencyLabel == 'wftm') {
+			sizeInUSD = _prices['FTM-USD'] * _size;
 		} else if (_currencyLabel == 'usdc') {
 			sizeInUSD = 0;
 		}
@@ -245,7 +245,7 @@
 	</div>
 
 	<div class='buttons'>
-		{#if $currencyLabel != 'weth' && $allowances[$currencyLabel] && $allowances[$currencyLabel]['trading'] * 1 == 0}
+		{#if $currencyLabel != 'wftm' && $allowances[$currencyLabel] && $allowances[$currencyLabel]['trading'] * 1 == 0}
 		<Button label={`Approve ${formatCurrency($currencyLabel)}`} onClick={() => {_approveCurrency()}} />
 		{:else}
 		<Button isRed={true} isLoading={$isSubmittingShort} label='Short' onClick={() => {_submitNewPosition(false)}} /> <Button isLoading={$isSubmittingLong} label='Long' onClick={() => {_submitNewPosition(true)}} />

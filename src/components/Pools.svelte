@@ -51,7 +51,7 @@
 	let oldPoolsShown = false;
 	function toggleOldPools() {
 		if (!oldPoolsShown) {
-			reloadPoolInfo('weth', true);
+			reloadPoolInfo('wftm', true);
 			reloadPoolInfo('usdc', true);
 		}
 		oldPoolsShown = !oldPoolsShown;
@@ -75,7 +75,7 @@
 	}
 
 	function getAPYCAP(_capPool, _poolStats) {
-		if (!_poolStats || !_poolStats['weth'] || !_capPool || !_capPool.supply*1) return '--';
+		if (!_poolStats || !_poolStats['wftm'] || !_capPool || !_capPool.supply*1) return '--';
 		const poolInception = getChainData('poolInception');
 		if (!poolInception) return '--';
 		const inceptionDate = poolInception['cap'];
@@ -93,9 +93,9 @@
 
 		// console.log('capUSDSupply', capUSDSupply);
 		for (const _currencyLabel of currencyLabels) {
-			if (_currencyLabel == 'weth') {
-				// ETH
-				cumulativeUSDFees += _poolStats[_currencyLabel].cumulativeFees * $prices['ETH-USD'] * 1;
+			if (_currencyLabel == 'wftm') {
+				// FTM
+				cumulativeUSDFees += _poolStats[_currencyLabel].cumulativeFees * $prices['FTM-USD'] * 1;
 			} else {
 				// USDC
 				cumulativeUSDFees += _poolStats[_currencyLabel].cumulativeFees * 1;
@@ -311,8 +311,8 @@
 			<div class='stats'>
 				<div class='row'>
 					<div class='label'>Pool Size</div>
-					<div class='value'>{getTVL(_currencyLabel, poolInfo, $address)} {formatCurrency(_currencyLabel)} {#if _currencyLabel == 'weth' && poolInfo && poolInfo.tvl && $prices['ETH-USD']}
-						<!-- <span class='grayed'>(${formatToDisplay($prices['ETH-USD'] * poolInfo.tvl || 0)})</span> -->
+					<div class='value'>{getTVL(_currencyLabel, poolInfo, $address)} {formatCurrency(_currencyLabel)} {#if _currencyLabel == 'wftm' && poolInfo && poolInfo.tvl && $prices['FTM-USD']}
+						<!-- <span class='grayed'>(${formatToDisplay($prices['FTM-USD'] * poolInfo.tvl || 0)})</span> -->
 						{/if}</div>
 				</div>
 				<!-- <div class='row'>
@@ -346,8 +346,8 @@
 						<div class='top-label'>My Rewards</div>
 						<a class:disabled={poolInfo.claimableReward == 0} on:click={() => {collectPoolReward(_currencyLabel)}}>Collect</a></div>
 					<div class='value'>{formatToDisplay(poolInfo.claimableReward) || 0} {formatCurrency(_currencyLabel)} 
-						{#if _currencyLabel == 'weth' && $prices['ETH-USD'] && poolInfo}
-						<span class='grayed'>(${formatToDisplay($prices['ETH-USD'] * poolInfo.claimableReward || 0)})</span>
+						{#if _currencyLabel == 'wftm' && $prices['FTM-USD'] && poolInfo}
+						<span class='grayed'>(${formatToDisplay($prices['FTM-USD'] * poolInfo.claimableReward || 0)})</span>
 						{/if}
 					</div>
 				</div>
@@ -407,8 +407,8 @@
 	    			</div>
 	    			<div class='value'>
 	    				{formatToDisplay(reward)} {formatCurrency(_currencyLabel)} 
-    					{#if _currencyLabel == 'weth' && $prices['ETH-USD']}
-    					<span class='grayed'>(${formatToDisplay($prices['ETH-USD'] * reward || 0)})</span>
+    					{#if _currencyLabel == 'wftm' && $prices['FTM-USD']}
+    					<span class='grayed'>(${formatToDisplay($prices['FTM-USD'] * reward || 0)})</span>
     					{/if}
 	    			</div>
 	    		</div>
@@ -442,8 +442,8 @@
 					<div class='column column-tvl'>
 						{#if poolInfo.tvl}
 							{formatToDisplay(poolInfo.tvl)} 
-							{#if _currencyLabel == 'weth'}
-							<span class='dollar-amount'>(${formatToDisplay($prices['ETH-USD'] * poolInfo.tvl || 0)})</span>
+							{#if _currencyLabel == 'wftm'}
+							<span class='dollar-amount'>(${formatToDisplay($prices['FTM-USD'] * poolInfo.tvl || 0)})</span>
 							{/if}
 						{:else if !$address}
 							--
@@ -470,8 +470,8 @@
 					<div class='row'>
 						<div class='column column-asset label'>My Rewards</div>
 						<div class='column column-apr'>{formatToDisplay(poolInfo.claimableReward) || 0} {formatCurrency(_currencyLabel)} 
-							{#if _currencyLabel == 'weth'}
-							<span class='dollar-amount'>(${formatToDisplay($prices['ETH-USD'] * poolInfo.claimableReward || 0)})</span>
+							{#if _currencyLabel == 'wftm'}
+							<span class='dollar-amount'>(${formatToDisplay($prices['FTM-USD'] * poolInfo.claimableReward || 0)})</span>
 							{/if}
 						</div>
 						<div class='column column-tvl'>

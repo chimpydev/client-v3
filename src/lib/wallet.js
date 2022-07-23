@@ -6,7 +6,7 @@ import { CHAINDATA } from './constants'
 import { showToast, hideModal } from './utils'
 import { chainId, signer, provider, address } from './stores'
 
-let _provider = new ethers.providers.JsonRpcProvider('https://arb1.arbitrum.io/rpc');
+let _provider = new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/fantom/');
 provider.set(_provider);
 chainId.set(250);
 let _walletConnect;
@@ -114,7 +114,7 @@ export async function switchChains() {
 	try {
 		await wallet.request({
 			method: 'wallet_switchEthereumChain',
-			params: [{ chainId: '0xA4B1' }],
+			params: [{ chainId: '0xfa' }],
 		});
 	} catch (switchError) {
 		// This error code indicates that the chain has not been added to MetaMask.
@@ -123,7 +123,7 @@ export async function switchChains() {
 				await wallet.request({
 					method: 'wallet_addEthereumChain',
 					params: [{
-						chainId: '0xA4B1',
+						chainId: '0xfa',
 						chainName: 'Fantom',
 						rpcUrls: [CHAINDATA[250]['rpc']],
 						nativeCurrency: {

@@ -176,7 +176,7 @@ export async function loadCandles(_resolution, _start, _end, prepend, productOve
 		// try again
 		// console.log('attempting chart again...');
 		setTimeout(() => {
-			loadCandles(_resolution, _start, _end, false, !_product ? 'ETH-USD' : false);
+			loadCandles(_resolution, _start, _end, false, !_product ? 'FTM-USD' : false);
 		}, 2000);
 		return;
 	}

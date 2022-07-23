@@ -46,7 +46,7 @@
 
 	function setMaxAmount() {
 		let _balance = balance * 1;
-		if (data.currencyLabel == 'weth') {
+		if (data.currencyLabel == 'wftm') {
 			_balance -= 0.003; // gas 
 			if (_balance < 0) _balance = 0;
 		}
