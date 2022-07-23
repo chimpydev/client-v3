@@ -8,7 +8,7 @@ import { chainId, signer, provider, address } from './stores'
 
 let _provider = new ethers.providers.JsonRpcProvider('https://arb1.arbitrum.io/rpc');
 provider.set(_provider);
-chainId.set(42161);
+chainId.set(250);
 let _walletConnect;
 
 export async function checkMetamaskSession() {
@@ -61,7 +61,7 @@ export async function connectWalletConnect() {
 
 		_walletConnect = new WalletConnectProvider.default({
 			rpc: {
-				42161: CHAINDATA[42161].rpc
+				250: CHAINDATA[250].rpc
 			}
 		});
 
@@ -124,14 +124,14 @@ export async function switchChains() {
 					method: 'wallet_addEthereumChain',
 					params: [{
 						chainId: '0xA4B1',
-						chainName: 'Arbitrum One',
-						rpcUrls: [CHAINDATA[42161]['rpc']],
+						chainName: 'Fantom',
+						rpcUrls: [CHAINDATA[250]['rpc']],
 						nativeCurrency: {
-							name: 'ETH',
-							symbol: 'ETH',
+							name: 'FTM',
+							symbol: 'FTM',
 							decimals: 18
 						},
-						blockExplorerUrls: [CHAINDATA[42161]['explorer']]
+						blockExplorerUrls: [CHAINDATA[250]['explorer']]
 					}],
 				});
 			} catch (addError) {

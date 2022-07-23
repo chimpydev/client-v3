@@ -70,26 +70,11 @@ export const ABIS = {
 // Contract addresses are pulled from router contract
 
 export const CHAINDATA = {
-	31337: {
-		label: 'localhost',
-		router: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
-		explorer: 'http://localhost:8545',
-		currencies: {
-			weth: ADDRESS_ZERO,
-			usdc: '0x5FC8d32690cc91D4c39d9d3abcBD16989F875707'
-		},
-		poolInception: {
-			weth: 1637154307000,
-			usdc: 1637154307000,
-			cap: 1637154307000
-		},
-		cap: '0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9'
-	},
-	42161: {
-		label: 'Arbitrum',
-		router: '0x5ABFF8F8D5b13253dCAB1e427Fdb3305cA620119',
-		explorer: 'https://arbiscan.io',
-		rpc: 'https://arb1.arbitrum.io/rpc', // for walletconnect
+	250: {
+		label: 'Fantom',
+		router: '0x1d718Cf0f55E6984852bA65415c94C7698F56f0E',
+		explorer: 'https://ftmscan.com/',
+		rpc: ' https://rpc.ankr.com/fantom/', // for walletconnect
 		currencies: {
 			weth: ADDRESS_ZERO,
 			usdc: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
@@ -99,6 +84,6 @@ export const CHAINDATA = {
 			usdc: 1637154307000,
 			cap: 1637154307000
 		},
-		cap: '0x031d35296154279DC1984dCD93E392b1f946737b'
+		cap: '0x6e386c7f8f7833f88af588348033c02cb49f0169'
 	}
 }

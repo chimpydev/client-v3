@@ -1,7 +1,7 @@
 <script>
 	import Volume from '../Volume.svelte'
 
-	import { EXTERNAL_ICON, DISCORD_ICON, TWITTER_ICON, TELEGRAM_ICON, GITHUB_ICON, ARBITRUM_ICON, CHECKMARK_ICON } from '../../lib/icons'
+	import { EXTERNAL_ICON, DISCORD_ICON, TWITTER_ICON, TELEGRAM_ICON, GITHUB_ICON, ARBITRUM_ICON, FANTOM_ICON, CHECKMARK_ICON } from '../../lib/icons'
 
 	import { CURRENCY_LOGOS } from '../../lib/constants'
 	import { PRODUCTS } from '../../lib/products'

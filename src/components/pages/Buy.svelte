@@ -1,6 +1,6 @@
 <script>
 
-	import { CHECKMARK_ICON, DISCORD_ICON, TWITTER_ICON, TELEGRAM_ICON, GITHUB_ICON, ARBITRUM_ICON } from '../../lib/icons'
+	import { CHECKMARK_ICON, DISCORD_ICON, TWITTER_ICON, TELEGRAM_ICON, GITHUB_ICON, ARBITRUM_ICON, FANTOM_ICON } from '../../lib/icons'
 
 	import { fade } from 'svelte/transition'
 

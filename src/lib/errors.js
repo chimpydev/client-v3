@@ -14,7 +14,7 @@ const ERROR_STRINGS = {
 	'!order': "Your order is still settling. Try again later.",
 	'!exists': "This order does not exist.",
 	'!margin': "Margin is too low.",
-	'!min-margin': "Margin is too low (min: 0.001 ETH).",
+	'!min-margin': "Margin is too low (min: 0.001 FTM).",
 	'!margin<fee': "Margin sent is below the required fee.",
 	'!leverage': "Leverage is too low.",
 	'!max-leverage': "Leverage is too high.",
