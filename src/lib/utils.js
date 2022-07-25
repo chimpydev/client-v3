@@ -20,7 +20,7 @@ import { component, currentPage, activeModal, toast, chainId, activeProducts, pr
 // Price title
 export function setTitle(product, price) {
 	if (get(currentPage) == 'trade') {
-		document.title = `${product} ${price} | CAP`;
+		document.title = `${product} ${price} | RCRV`;
 	}
 }
 
@@ -42,10 +42,10 @@ export function addrLink(addr) {
 	return `${explorer}/address/${addr}`; 
 }
 export function formatCurrency(_currencyLabel) {
-	if (!_currencyLabel) return 'FTM';
-	if (_currencyLabel.toLowerCase() == 'wftm') return 'FTM';
+	if (!_currencyLabel) return 'ETH';
+	if (_currencyLabel.toLowerCase() == 'weth') return 'ETH';
 	if (_currencyLabel.toLowerCase() == 'usdc') return 'USDC';
-	if (_currencyLabel.toLowerCase() == 'cap') return 'CAP';
+	if (_currencyLabel.toLowerCase() == 'rcrv') return 'RCRV';
 	return _currencyLabel;
 }
 export function formatToDisplay(amount, maxPrecision, fixPrecision) {
@@ -88,7 +88,7 @@ export function setActiveProducts() {
 	}
 	activeProducts.update((x) => {
 		for (const p in PRODUCTS) {
-			if (!positionProducts[p] && p != _productId && p != 'FTM-USD') {
+			if (!positionProducts[p] && p != _productId && p != 'ETH-USD') {
 				delete x[p];
 			} else {
 				x[p] = true;
@@ -168,19 +168,19 @@ export function loadRoute(path, isInitial) {
 	if (!path || path == '/' || path.includes('/home')) {
 		component.set(Home);
 		currentPage.set('home');
-		document.title = `Free Decentralized Perpetual Exchange | CAP`;
+		document.title = `Free Decentralized Perpetual Exchange | RCRV`;
 	} else if (path.includes('/trade')) {
 		component.set(Trade);
 		currentPage.set('trade');
-		document.title = `Trade | CAP`;
+		document.title = `Trade | RCRV`;
 	} else if (path.includes('/pool')) {
 		component.set(Pool);
 		currentPage.set('pool');
-		document.title = `Pool | CAP`;
+		document.title = `Pool | RCRV`;
 	} else if (path.includes('/buy')) {
 		component.set(Buy);
 		currentPage.set('buy');
-		document.title = `Buy CAP | CAP`;
+		document.title = `Buy RCRV | RCRV`;
 	}
 	hydrateData();
 }

@@ -77,13 +77,13 @@ async function handleTxComplete(type, details) {
 		showToast(`Collected rewards from ${formatCurrency(details.currencyLabel)} pool.`, 'success');
 		await getOldPoolInfo(details.currencyLabel);
 	} else if (type == 'cap-deposit') {
-		showToast('Deposited CAP into pool.', 'success');
+		showToast('Deposited RCRV into pool.', 'success');
 		await getCapPoolInfo();
 	} else if (type == 'cap-withdraw') {
-		showToast('Withdrew CAP from pool.', 'success');
+		showToast('Withdrew RCRV from pool.', 'success');
 		await getCapPoolInfo();
 	} else if (type == 'cap-collect') {
-		showToast('Collected rewards from CAP pool.', 'success');
+		showToast('Collected rewards from RCRV pool.', 'success');
 		await getCapPoolInfo();
 	}
 

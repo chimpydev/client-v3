@@ -4,7 +4,7 @@
 
 	import { formatToDisplay, formatCurrency } from '../../lib/utils'
 	
-	import { withdraw, withdrawCAP } from '../../lib/methods'
+	import { withdraw, withdrawRCRV } from '../../lib/methods'
 	
 	import Modal from './Modal.svelte'
 	import DataList from '../layout/DataList.svelte'
@@ -26,7 +26,7 @@
 		submitIsPending = true;
 		let error;
 		if (data.currencyLabel == 'cap') {
-			error = await withdrawCAP(
+			error = await withdrawRCRV(
 				amount
 			);
 		} else {

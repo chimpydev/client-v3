@@ -4,7 +4,7 @@
 
 	import { formatToDisplay, formatCurrency } from '../../lib/utils'
 	
-	import { deposit, depositCAP, getBalanceOf } from '../../lib/methods'
+	import { deposit, depositRCRV, getBalanceOf } from '../../lib/methods'
 	
 	import Modal from './Modal.svelte'
 	import DataList from '../layout/DataList.svelte'
@@ -23,7 +23,7 @@
 		submitIsPending = true;
 		let error;
 		if (data.currencyLabel == 'cap') {
-			error = await depositCAP(
+			error = await depositRCRV(
 				amount
 			);
 		} else {
@@ -46,7 +46,7 @@
 
 	function setMaxAmount() {
 		let _balance = balance * 1;
-		if (data.currencyLabel == 'wftm') {
+		if (data.currencyLabel == 'weth') {
 			_balance -= 0.003; // gas 
 			if (_balance < 0) _balance = 0;
 		}

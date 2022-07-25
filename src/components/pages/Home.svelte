@@ -260,8 +260,8 @@
 
 		<div class='links'>
 			<a href='#/buy'>Buy RCRV</a>
-			<a href='https://docs.cap.finance/#white-papers' target='_blank'>Whitepapers</a>
-			<a href='https://docs.cap.finance/' target='_blank'>Docs</a>
+			<a href='https://docs.recurved.finance/#white-papers' target='_blank'>Whitepapers</a>
+			<a href='https://docs.recurved.finance/' target='_blank'>Docs</a>
 			<a href='https://www.tokenterminal.com/terminal/projects/cap' target='_blank'>Token Terminal</a>
 			<a href='https://defillama.com/protocol/cap' target='_blank'>Defi Llama</a>
 		</div>

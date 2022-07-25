@@ -43,9 +43,13 @@
 		--red: #FF5000;
 		--red-dim: #E04700;
 		--red-dark: #421500;
-		--green: #00D604;
+		/*--green: #00D604;
 		--green-dim: #00C403;
-		--green-dark: #004D01;
+		--green-dark: #004D01;*/
+
+		--green: #008bd6;
+		--green-dim: #006dc4;
+		--green-dark: #00114d;
 
 		--rich-black: #080808;
 		--rich-black-fogra: #0F0F0F;

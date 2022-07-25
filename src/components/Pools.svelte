@@ -6,7 +6,7 @@
 
 	import { capPool, pools, oldPools, poolStats, allowances, prices, address } from '../lib/stores'
 
-	import { getAllowance, collectPoolReward, approveCurrency, getPoolInfo, getOldPoolInfo, collectCAPReward } from '../lib/methods'
+	import { getAllowance, collectPoolReward, approveCurrency, getPoolInfo, getOldPoolInfo, collectRCRVReward } from '../lib/methods'
 
 	import { showModal, formatCurrency, formatToDisplay, getChainData } from '../lib/utils'
 
@@ -51,7 +51,7 @@
 	let oldPoolsShown = false;
 	function toggleOldPools() {
 		if (!oldPoolsShown) {
-			reloadPoolInfo('wftm', true);
+			reloadPoolInfo('weth', true);
 			reloadPoolInfo('usdc', true);
 		}
 		oldPoolsShown = !oldPoolsShown;
@@ -74,8 +74,8 @@
 		//return "100%+"; // until enough trades come in to display actual stats from previous versions
 	}
 
-	function getAPYCAP(_capPool, _poolStats) {
-		if (!_poolStats || !_poolStats['wftm'] || !_capPool || !_capPool.supply*1) return '--';
+	function getAPYRCRV(_capPool, _poolStats) {
+		if (!_poolStats || !_poolStats['weth'] || !_capPool || !_capPool.supply*1) return '--';
 		const poolInception = getChainData('poolInception');
 		if (!poolInception) return '--';
 		const inceptionDate = poolInception['cap'];
@@ -89,13 +89,13 @@
 		// console.log('currencyLabels', currencyLabels);
 
 		let cumulativeUSDFees = 0;
-		let capUSDSupply = 30 * _capPool.supply; // assuming CAP price of 30
+		let capUSDSupply = 30 * _capPool.supply; // assuming RCRV price of 30
 
 		// console.log('capUSDSupply', capUSDSupply);
 		for (const _currencyLabel of currencyLabels) {
-			if (_currencyLabel == 'wftm') {
+			if (_currencyLabel == 'weth') {
 				// FTM
-				cumulativeUSDFees += _poolStats[_currencyLabel].cumulativeFees * $prices['FTM-USD'] * 1;
+				cumulativeUSDFees += _poolStats[_currencyLabel].cumulativeFees * $prices['ETH-USD'] * 1;
 			} else {
 				// USDC
 				cumulativeUSDFees += _poolStats[_currencyLabel].cumulativeFees * 1;
@@ -311,8 +311,8 @@
 			<div class='stats'>
 				<div class='row'>
 					<div class='label'>Pool Size</div>
-					<div class='value'>{getTVL(_currencyLabel, poolInfo, $address)} {formatCurrency(_currencyLabel)} {#if _currencyLabel == 'wftm' && poolInfo && poolInfo.tvl && $prices['FTM-USD']}
-						<!-- <span class='grayed'>(${formatToDisplay($prices['FTM-USD'] * poolInfo.tvl || 0)})</span> -->
+					<div class='value'>{getTVL(_currencyLabel, poolInfo, $address)} {formatCurrency(_currencyLabel)} {#if _currencyLabel == 'weth' && poolInfo && poolInfo.tvl && $prices['ETH-USD']}
+						<!-- <span class='grayed'>(${formatToDisplay($prices['ETH-USD'] * poolInfo.tvl || 0)})</span> -->
 						{/if}</div>
 				</div>
 				<!-- <div class='row'>
@@ -346,8 +346,8 @@
 						<div class='top-label'>My Rewards</div>
 						<a class:disabled={poolInfo.claimableReward == 0} on:click={() => {collectPoolReward(_currencyLabel)}}>Collect</a></div>
 					<div class='value'>{formatToDisplay(poolInfo.claimableReward) || 0} {formatCurrency(_currencyLabel)} 
-						{#if _currencyLabel == 'wftm' && $prices['FTM-USD'] && poolInfo}
-						<span class='grayed'>(${formatToDisplay($prices['FTM-USD'] * poolInfo.claimableReward || 0)})</span>
+						{#if _currencyLabel == 'weth' && $prices['ETH-USD'] && poolInfo}
+						<span class='grayed'>(${formatToDisplay($prices['ETH-USD'] * poolInfo.claimableReward || 0)})</span>
 						{/if}
 					</div>
 				</div>
@@ -360,19 +360,19 @@
 
     	<div class='asset'>
     		<img src={CURRENCY_LOGOS['cap']}>
-    		CAP
+    		RCRV
     		{#if !$capPool.supply || poolIsLoading['cap']}
     			<div class='loading-icon'>{@html SPINNER_ICON}</div>
     		{/if}
     	</div>
 
     	<div class='description'>
-    		Stake CAP to receive a share of revenue. <a href='#/buy'>Buy CAP</a>
+    		Stake RCRV to receive a share of revenue. <a href='#/buy'>Buy RCRV</a>
     	</div>
 
     	<div class='apy'>
 			<div class='label'>Historical Yield (APY)</div>
-			<div class='value'>{getAPYCAP($capPool, $poolStats, $prices)}</div>
+			<div class='value'>{getAPYRCRV($capPool, $poolStats, $prices)}</div>
 		</div>
 
     	<div class='stats'>
@@ -388,13 +388,13 @@
     			<div class='label'>
     				<div class='top-label'>My Share</div>
     				{#if $allowances['cap'] && $allowances['cap']['capPool'] * 1 == 0}
-    					<a on:click={() => {_approveCurrency('cap')}}>Approve CAP</a>
+    					<a on:click={() => {_approveCurrency('cap')}}>Approve RCRV</a>
     				{:else}
     				<a data-intercept="true" on:click={() => {showModal('PoolDeposit', {currencyLabel: 'cap'})}}>Deposit</a><span class='sep'>|</span><a class:disabled={$capPool.userBalance == 0} data-intercept="true" on:click={() => {showModal('PoolWithdraw', {currencyLabel: 'cap', userBalance: $capPool.userBalance })}}>Withdraw</a>
     				{/if}
     			</div>
     			<div class='value'>
-    				{formatToDisplay($capPool.userBalance)} CAP <span class='grayed'>({formatToDisplay($capPool.supply*1 == 0 ? 0 : 100*$capPool.userBalance/$capPool.supply)}%)</span>
+    				{formatToDisplay($capPool.userBalance)} RCRV <span class='grayed'>({formatToDisplay($capPool.supply*1 == 0 ? 0 : 100*$capPool.userBalance/$capPool.supply)}%)</span>
     			</div>
     		</div>
 
@@ -403,12 +403,12 @@
 	    		<div class='row'>
 	    			<div class='label'>
 	    				<div class='top-label'>My {formatCurrency(_currencyLabel)} Rewards <!-- (<strong>{formatToDisplay($capPool.poolShares[_currencyLabel])}%</strong> of fees) --></div>
-	    				<a class:disabled={reward == 0} on:click={() => {collectCAPReward(_currencyLabel)}}>Collect</a>
+	    				<a class:disabled={reward == 0} on:click={() => {collectRCRVReward(_currencyLabel)}}>Collect</a>
 	    			</div>
 	    			<div class='value'>
 	    				{formatToDisplay(reward)} {formatCurrency(_currencyLabel)} 
-    					{#if _currencyLabel == 'wftm' && $prices['FTM-USD']}
-    					<span class='grayed'>(${formatToDisplay($prices['FTM-USD'] * reward || 0)})</span>
+    					{#if _currencyLabel == 'weth' && $prices['ETH-USD']}
+    					<span class='grayed'>(${formatToDisplay($prices['ETH-USD'] * reward || 0)})</span>
     					{/if}
 	    			</div>
 	    		</div>
@@ -442,8 +442,8 @@
 					<div class='column column-tvl'>
 						{#if poolInfo.tvl}
 							{formatToDisplay(poolInfo.tvl)} 
-							{#if _currencyLabel == 'wftm'}
-							<span class='dollar-amount'>(${formatToDisplay($prices['FTM-USD'] * poolInfo.tvl || 0)})</span>
+							{#if _currencyLabel == 'weth'}
+							<span class='dollar-amount'>(${formatToDisplay($prices['ETH-USD'] * poolInfo.tvl || 0)})</span>
 							{/if}
 						{:else if !$address}
 							--
@@ -470,8 +470,8 @@
 					<div class='row'>
 						<div class='column column-asset label'>My Rewards</div>
 						<div class='column column-apr'>{formatToDisplay(poolInfo.claimableReward) || 0} {formatCurrency(_currencyLabel)} 
-							{#if _currencyLabel == 'wftm'}
-							<span class='dollar-amount'>(${formatToDisplay($prices['FTM-USD'] * poolInfo.claimableReward || 0)})</span>
+							{#if _currencyLabel == 'weth'}
+							<span class='dollar-amount'>(${formatToDisplay($prices['ETH-USD'] * poolInfo.claimableReward || 0)})</span>
 							{/if}
 						</div>
 						<div class='column column-tvl'>

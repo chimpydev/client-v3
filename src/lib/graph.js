@@ -8,7 +8,7 @@ import { getOrders, getPositions } from './methods'
 import { formatUnits, formatTrades, formatOrders, formatPositions, setActiveProducts, getChainData } from './utils'
 import { history, orders, positions, address, poolStats } from './stores'
 
-const graph_url = 'https://api.thegraph.com/subgraphs/name/0xcap/cap3';
+const graph_url = 'https://api.thegraph.com/subgraphs/name/chimpydev/recurved';
 
 export async function getVolume() {
 
@@ -38,11 +38,11 @@ export async function getVolume() {
   	
   	// console.log('datas', datas);
   	
-	let volumeFTM = 420000; // cumulative previous versions of CAP
+	let volumeFTM = 420000; // cumulative previous versions of RCRV
 	let volumeUSD = 0; // v2 + v1
 	for (const d of datas) {
 		// console.log('d', d);
-		if (d.id == ADDRESS_ZERO) { // FTM
+		if (d.id == ADDRESS_ZERO) { // ETH
 			volumeFTM += formatUnits(d.cumulativeVolume) * 1;
 		} else {
 			volumeUSD += formatUnits(d.cumulativeVolume) * 1;

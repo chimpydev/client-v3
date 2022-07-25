@@ -18,9 +18,9 @@ export function hydrateData() {
 		getUserOrders();
 		getUserPositions();
 	} else if (_currentPage == 'pool') {
-		getPoolInfo('wftm');
+		getPoolInfo('weth');
 		getPoolInfo('usdc');
-		getPoolStats('wftm');
+		getPoolStats('weth');
 		getPoolStats('usdc');
 		getCapPoolInfo();
 	}

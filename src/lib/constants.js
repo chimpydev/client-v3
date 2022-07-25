@@ -3,7 +3,7 @@ export const ADDRESS_ZERO = '0x0000000000000000000000000000000000000000';
 export const HISTORY_COUNT = 10;
 
 export const CURRENCY_LOGOS = {
-	wftm: '/logos/ETH.svg',
+	weth: '/logos/ETH.svg',
 	usdc: '/logos/USDC.svg',
 	cap: '/logos/CAP.svg'
 }
@@ -76,11 +76,11 @@ export const CHAINDATA = {
 		explorer: 'https://ftmscan.com/',
 		rpc: ' https://rpc.ankr.com/fantom/', // for walletconnect
 		currencies: {
-			wftm: ADDRESS_ZERO,
-			usdc: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
+			weth: ADDRESS_ZERO,
+			usdc: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75'
 		},
 		poolInception: {
-			wftm: 1637154307000,
+			weth: 1637154307000,
 			usdc: 1637154307000,
 			cap: 1637154307000
 		},

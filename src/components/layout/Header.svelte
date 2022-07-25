@@ -84,11 +84,11 @@
 
 		<div class='left'>
 			<a class='logo' class:active={!$currentPage || $currentPage == 'home'} href='/'>
-				<img src='/logos/CAP.svg' title='CAP Home' alt='CAP Home' />
+				<img src='/logos/RCRV.svg' title='RCRV Home' alt='RCRV Home' />
 			</a>
 			<a class='link' class:active={$currentPage == 'trade'} href='#/trade'>Trade</a>
 			<a class='link' class:active={$currentPage == 'pool'} href='#/pool'>Pool</a>
-			<a class='link' href='https://docs.cap.finance' target='_blank'>Docs</a>
+			<a class='link' href='https://docs.recurved.finance' target='_blank'>Docs</a>
 		</div>
 
 		<div class='right'>

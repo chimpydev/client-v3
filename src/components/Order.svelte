@@ -92,8 +92,8 @@
 
 	async function getSizeInUSD(_currencyLabel, _prices, _size) {
 		if (!_prices || !_currencyLabel || !_size) return 0;
-		if (_currencyLabel == 'wftm') {
-			sizeInUSD = _prices['FTM-USD'] * _size;
+		if (_currencyLabel == 'weth') {
+			sizeInUSD = _prices['ETH-USD'] * _size;
 		} else if (_currencyLabel == 'usdc') {
 			sizeInUSD = 0;
 		}
@@ -245,7 +245,7 @@
 	</div>
 
 	<div class='buttons'>
-		{#if $currencyLabel != 'wftm' && $allowances[$currencyLabel] && $allowances[$currencyLabel]['trading'] * 1 == 0}
+		{#if $currencyLabel != 'weth' && $allowances[$currencyLabel] && $allowances[$currencyLabel]['trading'] * 1 == 0}
 		<Button label={`Approve ${formatCurrency($currencyLabel)}`} onClick={() => {_approveCurrency()}} />
 		{:else}
 		<Button isRed={true} isLoading={$isSubmittingShort} label='Short' onClick={() => {_submitNewPosition(false)}} /> <Button isLoading={$isSubmittingLong} label='Long' onClick={() => {_submitNewPosition(true)}} />
@@ -290,9 +290,9 @@
 	</div>
 
 	{#if !$address}
-	<div class='note'>CAP is an open protocol to trade crypto perpetuals with 0 fees. <a data-intercept="true" on:click={() => {showModal('Connect')}}>Connect your wallet</a> on Arbitrum to get started.</div>
+	<div class='note'>Recurved is an open protocol to trade crypto perpetuals with 0 fees. <a data-intercept="true" on:click={() => {showModal('Connect')}}>Connect your wallet</a> on Fantom to get started.</div>
 	{:else if $address && balance * 1 == 0}
-	<div class='note'><a href='https://docs.cap.finance/setting-up-your-wallet' target='_blank'>Bridge funds</a> to Arbitrum to start trading.</div>
+	<div class='note'><a href='https://docs.recurved.finance/setting-up-your-wallet' target='_blank'>Bridge funds</a> to Fantom to start trading.</div>
 	{/if}
 	
 

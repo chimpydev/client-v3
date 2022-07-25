@@ -17,7 +17,7 @@
 <Modal title='Invalid Network' showHeader={true} showCancel={true}>
 
 	<div class='note'>
-		Select Fantom as your wallet's network to trade or pool on CAP.
+		Select Fantom as your wallet's network to trade or pool on RCRV.
 	</div>
 
 	<Button wrap={true} onClick={() => {switchChains()}} label={`Switch to Fantom`} />

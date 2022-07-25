@@ -37,7 +37,7 @@ export async function selectProduct(productId) {
 	// console.log('product', product);
 
 	if (!product.symbol) {
-		product = formatProduct('FTM-USD', {symbol: 'FTM-USD', productId: 'FTM-USD', maxLeverage: 50 * 10**8, fee: 0});
+		product = formatProduct('ETH-USD', {symbol: 'ETH-USD', productId: 'ETH-USD', maxLeverage: 50 * 10**8, fee: 0});
 	}
 
 	// console.log('product2', product);
@@ -87,7 +87,7 @@ export async function getAllowance(currencyLabel, spenderName) {
 
 	// console.log('currencyLabel', currencyLabel);
 
-	if (currencyLabel == 'wftm') {
+	if (currencyLabel == 'weth') {
 		Stores.allowances.update((x) => {
 			if (!x[currencyLabel]) x[currencyLabel] = {};
 			x[currencyLabel][spenderName] = parseUnits(10**10, 18);
@@ -167,8 +167,8 @@ export async function getBalanceOf(currencyLabel, address) {
 	}
 
 	let balance, decimals;
-	if (currencyLabel == 'wftm') {
-		// get FTM balance
+	if (currencyLabel == 'weth') {
+		// get ETH balance
 		balance = await get(Stores.provider).getBalance(address);
 	} else {
 		const contract = await getContract(currencyLabel);
@@ -364,7 +364,7 @@ export async function deposit(currencyLabel, amount) {
 	try {
 		let tx;
 
-		if (currencyLabel == 'wftm') {
+		if (currencyLabel == 'weth') {
 			tx = await contract.deposit(0, {value: parseUnits(amount, 18)});
 		} else {
 			tx = await contract.deposit(parseUnits(amount, 18));
@@ -469,7 +469,7 @@ export async function getCapPoolInfo() {
 
 }
 
-export async function depositCAP(amount) {
+export async function depositRCRV(amount) {
 	
 	const contract = await getContract('capPool', true);
 	if (!contract) throw 'No contract available.';
@@ -478,7 +478,7 @@ export async function depositCAP(amount) {
 		let tx = await contract.deposit(parseUnits(amount, 18));
 		monitorTx(tx.hash, 'cap-deposit');
 		hideModal();
-		amplitude.getInstance().logEvent('Pool Deposit CAP', {amount});
+		amplitude.getInstance().logEvent('Pool Deposit RCRV', {amount});
 	} catch(e) {
 		showToast(e);
 		return e;
@@ -486,7 +486,7 @@ export async function depositCAP(amount) {
 
 }
 
-export async function withdrawCAP(amount) {
+export async function withdrawRCRV(amount) {
 	
 	const contract = await getContract('capPool', true);
 	if (!contract) throw 'No contract available.';
@@ -495,7 +495,7 @@ export async function withdrawCAP(amount) {
 		let tx = await contract.withdraw(parseUnits(amount, 18));
 		monitorTx(tx.hash, 'cap-withdraw');
 		hideModal();
-		amplitude.getInstance().logEvent('Pool Withdraw CAP', {amount});
+		amplitude.getInstance().logEvent('Pool Withdraw RCRV', {amount});
 	} catch(e) {
 		showToast(e);
 		return e;
@@ -503,7 +503,7 @@ export async function withdrawCAP(amount) {
 
 }
 
-export async function collectCAPReward(currencyLabel) {
+export async function collectRCRVReward(currencyLabel) {
 	
 	const contract = await getContract('caprewards', true, currencyLabel);
 	if (!contract) throw 'No contract available.';
@@ -511,7 +511,7 @@ export async function collectCAPReward(currencyLabel) {
 	try {
 		let tx = await contract.collectReward();
 		monitorTx(tx.hash, 'cap-collect', {currencyLabel});
-		amplitude.getInstance().logEvent('Pool Collect CAP', {currencyLabel});
+		amplitude.getInstance().logEvent('Pool Collect RCRV', {currencyLabel});
 	} catch(e) {
 		showToast(e);
 		return e;
@@ -521,13 +521,13 @@ export async function collectCAPReward(currencyLabel) {
 
 // Rewards
 
-export async function getClaimableReward(currencyLabel, forCAP, isOld) {
+export async function getClaimableReward(currencyLabel, forRCRV, isOld) {
 
 	const address = get(Stores.address);
 	if (!address) return 0;
 	
-	let contractName = forCAP ? 'caprewards' : 'poolrewards';
-	if (forCAP) {
+	let contractName = forRCRV ? 'caprewards' : 'poolrewards';
+	if (forRCRV) {
 		contractName = 'caprewards';
 	} else if (isOld) {
 		contractName = 'oldpoolrewards';
@@ -565,7 +565,7 @@ export async function submitOrder(isLong) {
 
 		let marginEth = 0;
 
-		if (currencyLabel == 'wftm') {
+		if (currencyLabel == 'weth') {
 			// Add fee to margin
 			const product = get(Stores.product);
 			const fee = product.fee * 1;
@@ -615,7 +615,7 @@ export async function submitCloseOrder(productId, currencyLabel, isLong, size) {
 	try {
 		let tx;
 
-		if (currencyLabel == 'wftm') {
+		if (currencyLabel == 'weth') {
 
 			const product = await getProduct(productId);
 			const fee = (size * product.fee / 100).toFixed(10);
