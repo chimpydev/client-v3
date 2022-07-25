@@ -254,12 +254,12 @@
 		
 		<div class='community'>
 			<a href='https://discord.gg/zkdr8vnujz' target='_blank' title='Discord'>{@html DISCORD_ICON}</a>
-			<a href='https://twitter.com/CapDotFinance' target='_blank' title='Twitter'>{@html TWITTER_ICON}</a>
-			<a href='https://github.com/0xcap' target='_blank' title='Github'>{@html GITHUB_ICON}</a>
+			<a href='https://twitter.com/RecurvedFinance' target='_blank' title='Twitter'>{@html TWITTER_ICON}</a>
+			<a href='https://github.com/recurved-finance' target='_blank' title='Github'>{@html GITHUB_ICON}</a>
 		</div>
 
 		<div class='links'>
-			<a href='#/buy'>Buy CAP</a>
+			<a href='#/buy'>Buy RCRV</a>
 			<a href='https://docs.cap.finance/#white-papers' target='_blank'>Whitepapers</a>
 			<a href='https://docs.cap.finance/' target='_blank'>Docs</a>
 			<a href='https://www.tokenterminal.com/terminal/projects/cap' target='_blank'>Token Terminal</a>
